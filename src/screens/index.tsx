@@ -1,5 +1,5 @@
 import Home from "./Home";
-import SavedSets from "./SavedSets";
+import CompletedSets from "./CompletedSets";
 import ClothingSelect from "./ClothingSelect";
 
-export { Home, ClothingSelect, SavedSets };
+export { Home, ClothingSelect, CompletedSets };
