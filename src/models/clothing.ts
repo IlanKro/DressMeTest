@@ -1,6 +1,15 @@
-interface Shirt {}
-interface Pants {}
+export interface ClothingItem {
+	id: number;
+	type: string;
+	color: string;
+	size: string;
+	brand: string;
+}
 
-interface Shoes {}
+export type ClothingItems = Array<ClothingItem>;
 
-type ClothingItems = Array<Shirt | Pants | Shoes>;
+export type SavedSet = {
+	shirt: ClothingItem;
+	pants: ClothingItem;
+	shoes: ClothingItem;
+};

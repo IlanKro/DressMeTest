@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { clearPersistedStore, stopPersisting, startPersisting, isPersisting } from "mobx-persist-store";
+import { SavedSet, ClothingItems } from "../../models/clothing";
 
 class ClothingStore {
 	constructor() {
@@ -11,6 +12,8 @@ class ClothingStore {
 	clothingItems: ClothingItems = [];
 
 	startTime = new Date();
+
+	savedSets: SavedSet[] = [];
 
 	restartTimer = () => {
 		this.startTime = new Date();
@@ -24,8 +27,16 @@ class ClothingStore {
 		return this.clothingItems;
 	}
 
+	get getSavedSets() {
+		return this.savedSets;
+	}
+
 	setClothingItems = (items: ClothingItems) => {
 		this.clothingItems = items;
+	};
+
+	addSavedSet = (set: SavedSet) => {
+		this.savedSets.push(set);
 	};
 
 	async clearStore() {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Routes, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../../util/Enums";
-import { imgSrc } from "../../util/images";
+import { imgSrc } from "../../util/Images";
+import SideMenu from "../SideMenu";
 import "./Header.scss";
 
 const Header = () => {
@@ -10,27 +11,24 @@ const Header = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const isHome = location.pathname === "/";
-	const pageTitle = isHome ? ROUTES.HOME : location.pathname.split("/").join(" ").split("-").join(" ");
+	const pageTitle = isHome ? ROUTES.HOME : location.pathname.split("/").join(" ").split("-").join(" ").replace("clothing select", "");
 
 	return (
-		<div id={"header"}>
-			{!isHome && (
-				<button className={"back-button"} onClick={() => navigate(-1)}>
-					{"<"}
+		<>
+			<div id={"header"}>
+				{!isHome && (
+					<button className={"back-button"} onClick={() => navigate(-1)}>
+						{">"}
+					</button>
+				)}
+				<h1 onClick={() => navigate("/")}>{pageTitle}</h1>
+				<button className="header-side-menubar-button" onClick={() => setShow(!show)}>
+					<img src={imgSrc.menuBars} className="header-side-menubar-img" />
 				</button>
-			)}
-			<h1 onClick={() => navigate("/")}>{pageTitle}</h1>
-			<button className="header-side-menubar-button" onClick={() => setShow(!show)}>
-				<img src={imgSrc.menuBars} className="header-side-menubar-img" />
-			</button>
-			{show && (
-				<span id={"side-menu"}>
-					{Object.entries(Routes).map(() => (
-						<></>
-					))}
-				</span>
-			)}
-		</div>
+			</div>
+
+			{show && <SideMenu setShow={setShow} />}
+		</>
 	);
 };
 

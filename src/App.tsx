@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { hydrate } from "react-dom";
 import "./App.scss";
 import AppRouter from "./AppRouter";
 import { ClothingStore } from "./stores";
 import { API_URL } from "./util/Enums";
-import { persistStore } from "./util/tools";
+import { persistStore } from "./util/Tools";
 
 const App = () => {
 	useEffect(() => {
@@ -28,8 +27,6 @@ const App = () => {
 		};
 		fetch();
 		hydrate();
-
-		console.log("ClothingStore", ClothingStore);
 	}, []);
 
 	return (

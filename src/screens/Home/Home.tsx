@@ -1,9 +1,38 @@
 import React from "react";
+import { ClothingStore } from "../../stores";
+import { useNavigate } from "react-router-dom";
+import { SLUGS } from "../../util/Enums";
 import "./Home.scss";
 
 const Home = () => {
+	const { getSavedSets: savedSets, getClothingItems: clothingItems } = ClothingStore;
 	document.title = "Home";
-	return <></>;
+	const navigate = useNavigate();
+
+	const ClothSelectButton = ({ buttonText, slug, isSelected }: { buttonText: string; slug: string; isSelected: boolean }) => {
+		return (
+			<button onClick={() => navigate(slug)} className={`cloth-select-button ${isSelected ? "cloth-select-button-selected" : ""}`}>
+				{buttonText}
+			</button>
+		);
+	};
+
+	return (
+		<div id="home">
+			<div id="homepage-navigation">
+				<ClothSelectButton buttonText={"shirts"} slug={SLUGS.Shirts} isSelected={false} />
+				<ClothSelectButton buttonText={"pants"} slug={SLUGS.Pants} isSelected={false} />
+				<ClothSelectButton buttonText={"shoes"} slug={SLUGS.Shoes} isSelected={false} />
+
+				<ClothSelectButton buttonText={"Completed sets: " + savedSets.length} slug={SLUGS.Completed_Sets} isSelected={false} />
+			</div>
+			<span className="home-statistics">
+				<span> {"shirts: " + clothingItems.filter((item) => item.type === "shirt").length}</span>
+				<span> {"pants: " + clothingItems.filter((item) => item.type === "pants").length}</span>
+				<span> {"shoes: " + clothingItems.filter((item) => item.type === "shoes").length}</span>
+			</span>
+		</div>
+	);
 };
 
 export default Home;

@@ -1,0 +1,12 @@
+#side-menu {
+	position: absolute;
+	height: calc(100% - 7rem);
+	width: 40vw;
+	background-color: grey;
+	left: 0;
+	bottom: 0;
+
+	button {
+		background-color: unset;
+	}
+}

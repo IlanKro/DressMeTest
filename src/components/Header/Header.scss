@@ -6,6 +6,10 @@
 	background-color: #8d7569;
 	position: relative;
 
+	h1 {
+		font-size: 2.5rem;
+	}
+
 	button {
 		height: 100%;
 		background-color: unset;
@@ -13,12 +17,12 @@
 
 	.back-button {
 		position: absolute;
-		left: 0;
+		right: 0;
 	}
 
 	.header-side-menubar-button {
 		position: absolute;
-		right: 0;
+		left: 0;
 		height: 100%;
 		background-color: unset;
 		.header-side-menubar-img {
