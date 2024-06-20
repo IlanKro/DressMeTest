@@ -6,6 +6,8 @@ class ClothingStore {
 		makeAutoObservable(this);
 	}
 
+	persist_data = ["clothingItems", "startTime"];
+
 	clothingItems: ClothingItems = [];
 
 	startTime = new Date();

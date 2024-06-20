@@ -10,7 +10,6 @@ const Header = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const isHome = location.pathname === "/";
-	console.log("??", location.pathname === "/");
 	const pageTitle = isHome ? ROUTES.HOME : location.pathname.split("/").join(" ").split("-").join(" ");
 
 	return (
