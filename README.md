@@ -2,7 +2,7 @@
 
 App to help a user decide what to wear based on a fixed API,
 
-took so far: 5 hours.
+took so far: 11 hours.
 
 # Navigation
 
