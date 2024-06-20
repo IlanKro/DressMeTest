@@ -7,9 +7,23 @@
 	position: relative;
 
 	button {
-		position: absolute;
-		left: 0;
 		height: 100%;
 		background-color: unset;
+	}
+
+	.back-button {
+		position: absolute;
+		left: 0;
+	}
+
+	.header-side-menubar-button {
+		position: absolute;
+		right: 0;
+		height: 100%;
+		background-color: unset;
+		.header-side-menubar-img {
+			height: 2rem;
+			width: 2rem;
+		}
 	}
 }

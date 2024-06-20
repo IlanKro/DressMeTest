@@ -6,6 +6,8 @@ class ClothingStore {
 		makeAutoObservable(this);
 	}
 
+	clothingItems: ClothingItems = [];
+
 	startTime = new Date();
 
 	restartTimer = () => {
@@ -14,6 +16,14 @@ class ClothingStore {
 
 	getTimeSinceStart = () => {
 		return new Date().getTime() - this.startTime.getTime();
+	};
+
+	get getClothingItems() {
+		return this.clothingItems;
+	}
+
+	setClothingItems = (items: ClothingItems) => {
+		this.clothingItems = items;
 	};
 
 	async clearStore() {
