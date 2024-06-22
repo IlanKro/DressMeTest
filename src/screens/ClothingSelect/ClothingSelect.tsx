@@ -5,13 +5,13 @@ import { Card, Popup } from "../../components";
 import { ClothingItem, ClothingItems, ClothingType } from "../../models/Clothing";
 import { ClothingStore } from "../../stores";
 import { imgSrc } from "../../util/Images";
-import "./ClothingSelect.scss";
 import { SLUGS } from "../../util/Enums";
+import "./ClothingSelect.scss";
 
 const ClothingSelect = () => {
 	const [sortType, setSortType] = useState("recommended");
 	const [clothingItemsAvaileable, setClothingItemsAvaileable] = useState<ClothingItems>([]);
-	const showPopup = ClothingStore.getPopupSettings.show;
+	const shouldShowPopup = ClothingStore.getPopupSettings.show;
 
 	const location = useLocation();
 	const params = useParams();
@@ -89,7 +89,7 @@ const ClothingSelect = () => {
 	return (
 		<div id={"clothing-select"}>
 			<div>
-				{showPopup && <Popup />}
+				{shouldShowPopup && <Popup />}
 				<label htmlFor="sort">sort:</label>
 				<select
 					onChange={({ target }) => {

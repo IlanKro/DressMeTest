@@ -27,6 +27,12 @@ There's a back button at any stage that is not homepage.
 -   I decided to put a little icon instead of a picture.
 -   I didn't manage to find a solution for popups and navigation, since popups only appear on one screen I made it local. if I were to revisit the app I would find a way to implement it as a global thing.
 
+# Saved Sets
+
+-   Decided using a table since it's the simplest and most efficient way to show this info + completion time out of the table.
+-   I wanted to ameka popup for the deletion but it's not required, and it would mean more time making a 2 button popup.
+-   I opted to put the deletion button in the header since it's efficient use of space which is needed for mobile apps.
+
 # Recommendation Algorithm
 
 the algorithem will recommend the user items based on size and color of the first selected element.
@@ -38,7 +44,7 @@ I don't take options from the user this is just for sorting.
 
 -   The design and color choices are not made by a graphic designer so it won't look pretty, the layout is also lacking and I am aware of it, it's somethign that on a product you ask the customer's opinion or UI/UX designer.
 
--   Since it wasn't requested there is no "reset set" button, or a way to delete sets, also in the context of a closet it makes no sense to take out elements of the selection but that's what was requested.
+-   In the context of a closet it makes no sense to take out elements of the selection but that's what was requested.
 
 # Known bugs
 
