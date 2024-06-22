@@ -1,7 +1,25 @@
 #popup {
 	z-index: 1;
 	background-color: white;
+	position: absolute;
+	width: 80vw;
+	height: 6rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 0.1px solid black;
+	top: 25vh;
+	left: 10vw;
+	box-shadow: 1px 1px 1px grey;
+
+	h2 {
+		color: black;
+		align-content: center;
+		font-size: 1rem;
+	}
+
 	button {
-		background-color: unset;
+		background-color: green;
 	}
 }

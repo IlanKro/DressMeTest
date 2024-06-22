@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Card } from "../../components";
+import { Card, Popup } from "../../components";
 import { ClothingItem, ClothingItems, ClothingType } from "../../models/Clothing";
 import { ClothingStore } from "../../stores";
 import { imgSrc } from "../../util/Images";
 import "./ClothingSelect.scss";
+import { SLUGS } from "../../util/Enums";
 
 const ClothingSelect = () => {
 	const [sortType, setSortType] = useState("recommended");
 	const [clothingItemsAvaileable, setClothingItemsAvaileable] = useState<ClothingItems>([]);
+	const showPopup = ClothingStore.getPopupSettings.show;
 
 	const location = useLocation();
 	const params = useParams();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const { getClothingItems, getCurrentSet: currentSet, sortByRecommended, convertSize } = ClothingStore;
+		const { getClothingItems, getCurrentSet: currentSet, sortByRecommended, convertSize, restartTimer } = ClothingStore;
+		if (Object.values(currentSet).every((cloth) => cloth === null)) restartTimer();
+
 		let clothingItems = getClothingItems && getClothingItems.filter(({ type }) => type === clothingType);
 		switch (sortType) {
 			case "recommended":
@@ -39,11 +43,6 @@ const ClothingSelect = () => {
 		setClothingItemsAvaileable(clothingItems);
 	}, [ClothingStore, sortType, location]);
 
-	useEffect(() => {
-		const { getCurrentSet: currentSet } = ClothingStore;
-		if (Object.values(currentSet).every((item) => item !== null)) console.log("gratz");
-	}, [ClothingStore]);
-
 	document.title = location.pathname;
 
 	const clothingType: ClothingType | undefined = params.selected as ClothingType;
@@ -55,23 +54,42 @@ const ClothingSelect = () => {
 	};
 
 	const addItem = (clothingItem: ClothingItem) => {
-		const { getFirstItem: firstItem, getCurrentSet: currentSet, setCurrentSetItem, setFirstItem, removeCloth } = ClothingStore;
+		const {
+			getFirstItem: firstItem,
+			getCurrentSet: currentSet,
+			setCurrentSetItem,
+			setFirstItem,
+			showPopup,
+			removeCloth,
+			addSavedSet,
+			resetCurrentSet,
+		} = ClothingStore;
 		if (!firstItem || firstItem?.type === clothingItem.type) {
 			setFirstItem(clothingItem);
 		}
 		setCurrentSetItem(clothingItem.type, clothingItem);
 
 		const nextItem = Object.entries(currentSet).find((set) => !set[1]);
-		console.log("next item", Object.entries(currentSet), nextItem);
 		if (nextItem) navigate("/clothing-select/" + nextItem[0]);
 		else {
-			console.log("popup");
+			showPopup({
+				text: "successfully added set!",
+				onAccept: () => {
+					addSavedSet(currentSet);
+					Object.entries(currentSet).forEach((entry) => {
+						removeCloth(entry[1]?.id || 0);
+					});
+					resetCurrentSet();
+					navigate("/" + SLUGS.Completed_Sets);
+				},
+			});
 		}
 	};
 
 	return (
 		<div id={"clothing-select"}>
 			<div>
+				{showPopup && <Popup />}
 				<label htmlFor="sort">sort:</label>
 				<select
 					onChange={({ target }) => {

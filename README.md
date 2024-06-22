@@ -25,6 +25,7 @@ There's a back button at any stage that is not homepage.
 -   The card element supports adding more elements without changing the structure, it's easier to maintain, the design is not very supportive of the fact though.
 -   The button placement just looks right.
 -   I decided to put a little icon instead of a picture.
+-   I didn't manage to find a solution for popups and navigation, since popups only appear on one screen I made it local. if I were to revisit the app I would find a way to implement it as a global thing.
 
 # Recommendation Algorithm
 

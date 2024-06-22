@@ -5,7 +5,7 @@ import { SLUGS } from "../../util/Enums";
 import "./Home.scss";
 
 const Home = () => {
-	const { getSavedSets: savedSets, getClothingItems: clothingItems } = ClothingStore;
+	const { getSavedSets: savedSets, getClothingItems: clothingItems, getCurrentSet: currentSet } = ClothingStore;
 	document.title = "Home";
 	const navigate = useNavigate();
 
@@ -20,9 +20,9 @@ const Home = () => {
 	return (
 		<div id="home">
 			<div id="homepage-navigation">
-				<ClothSelectButton buttonText={"shirts"} slug={SLUGS.Shirts} isSelected={false} />
-				<ClothSelectButton buttonText={"pants"} slug={SLUGS.Pants} isSelected={false} />
-				<ClothSelectButton buttonText={"shoes"} slug={SLUGS.Shoes} isSelected={false} />
+				<ClothSelectButton buttonText={"shirts"} slug={SLUGS.Shirts} isSelected={!!currentSet.shirt} />
+				<ClothSelectButton buttonText={"pants"} slug={SLUGS.Pants} isSelected={!!currentSet.pants} />
+				<ClothSelectButton buttonText={"shoes"} slug={SLUGS.Shoes} isSelected={!!currentSet.shoes} />
 
 				<ClothSelectButton buttonText={"Completed sets: " + savedSets.length} slug={SLUGS.Completed_Sets} isSelected={false} />
 			</div>

@@ -1,14 +1,15 @@
+import { observer } from "mobx-react";
 import React from "react";
 
-import { createBrowserRouter, RouterProvider, Outlet, Link } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Header } from "./components";
 import { Home, ClothingSelect, CompletedSets } from "./screens";
+import { ClothingStore } from "./stores";
 
 const AppRouter = () => {
 	const Layout = () => (
 		<div id="layout">
 			<Header />
-
 			<Outlet />
 		</div>
 	);
@@ -36,4 +37,4 @@ const AppRouter = () => {
 	return <RouterProvider router={router} />;
 };
 
-export default AppRouter;
+export default observer(AppRouter);

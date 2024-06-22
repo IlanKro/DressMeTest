@@ -14,3 +14,10 @@ export type SavedSet = {
 	pants: ClothingItem | null;
 	shoes: ClothingItem | null;
 };
+
+export type CompletedSet = {
+	time: number;
+	shirt: ClothingItem | null;
+	pants: ClothingItem | null;
+	shoes: ClothingItem | null;
+};

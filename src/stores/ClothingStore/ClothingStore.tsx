@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { clearPersistedStore, stopPersisting, startPersisting, isPersisting } from "mobx-persist-store";
-import { SavedSet, ClothingItems, ClothingItem } from "../../models/Clothing";
+import { SavedSet, ClothingItems, ClothingItem, CompletedSet } from "../../models/Clothing";
 import { SIZE_CONVERTION } from "../../util/Enums";
 import sortBy from "lodash/sortBy";
 import { PopupSettings } from "../../models/Popup";
@@ -18,10 +18,11 @@ class ClothingStore {
 
 	startTime = new Date();
 
-	savedSets: SavedSet[] = [];
+	savedSets: CompletedSet[] = [];
 
 	firstItem: ClothingItem | null = null;
 
+	//if the app would be bigger it would be in a different store.
 	popupSettings: PopupSettings = { show: false, text: "", onAccept: () => {} };
 
 	restartTimer = () => {
@@ -29,7 +30,8 @@ class ClothingStore {
 	};
 
 	getTimeSinceStart = () => {
-		return new Date().getTime() - this.startTime.getTime();
+		// return new Date()?.getTime() - this.startTime?.getTime();
+		return 0;
 	};
 
 	get getClothingItems() {
@@ -66,16 +68,15 @@ class ClothingStore {
 
 	removeSavedItems = (clothingItems: ClothingItems) => {
 		return clothingItems.filter(
-			({ id }) => !this.savedSets.some((savedSet) => Object.values(savedSet).some((savedItem) => savedItem?.id === id))
+			({ id }) => !this.savedSets.some((savedSet) => Object.values(savedSet).some((savedItem) => (savedItem as ClothingItem)?.id === id))
 		);
 	};
 
 	addSavedSet = (set: SavedSet) => {
-		this.savedSets.push(set);
+		this.savedSets.push({ ...set, time: this.getTimeSinceStart() });
 	};
 
 	setCurrentSetItem = (type: keyof SavedSet, item: ClothingItem) => {
-		console.log("???", type, item);
 		this.currentSet[type] = item;
 	};
 
@@ -110,6 +111,7 @@ class ClothingStore {
 	};
 
 	resetCurrentSet = () => {
+		this.startTime = new Date();
 		this.currentSet = { shirt: null, pants: null, shoes: null };
 	};
 
