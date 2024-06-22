@@ -29,8 +29,9 @@ There's a back button at any stage that is not homepage.
 # Recommendation Algorithm
 
 the algorithem will recommend the user items based on size and color of the first selected element.
-Size - **
-Color - **
+Size - looked up convertion rates of letters to sizes, used the UK/US convertions size it is similar, used a proximity sort, if it's close tot he first item it will be recommended.
+Color - sadly the values given are in words I originally wanted a convoluted hexcode matching technique, but due to time constraints I will match the color.
+I don't take options from the user this is just for sorting.
 
 # General Notes
 

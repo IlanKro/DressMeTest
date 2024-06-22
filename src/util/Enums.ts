@@ -20,9 +20,10 @@ export const SLUGS = {
 };
 
 export const SIZE_CONVERTION = {
-	S: 1,
-	M: 2,
-	L: 3,
-	XL: 4,
-	XXL: 5,
+	XS: 34,
+	S: 36,
+	M: 38,
+	L: 40,
+	XL: 42,
+	XXL: 44,
 };

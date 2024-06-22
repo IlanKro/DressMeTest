@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../components";
-import { ClothingItems, ClothingType } from "../../models/Clothing";
+import { ClothingItem, ClothingItems, ClothingType } from "../../models/Clothing";
 import { ClothingStore } from "../../stores";
 import { imgSrc } from "../../util/Images";
 import "./ClothingSelect.scss";
@@ -13,6 +13,7 @@ const ClothingSelect = () => {
 
 	const location = useLocation();
 	const params = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const { getClothingItems, getCurrentSet: currentSet, sortByRecommended, convertSize } = ClothingStore;
@@ -36,7 +37,12 @@ const ClothingSelect = () => {
 				break;
 		}
 		setClothingItemsAvaileable(clothingItems);
-	}, [ClothingStore, sortType]);
+	}, [ClothingStore, sortType, location]);
+
+	useEffect(() => {
+		const { getCurrentSet: currentSet } = ClothingStore;
+		if (Object.values(currentSet).every((item) => item !== null)) console.log("gratz");
+	}, [ClothingStore]);
 
 	document.title = location.pathname;
 
@@ -46,6 +52,21 @@ const ClothingSelect = () => {
 		shirt: imgSrc.shirt,
 		pants: imgSrc.pants,
 		shoes: imgSrc.shoes,
+	};
+
+	const addItem = (clothingItem: ClothingItem) => {
+		const { getFirstItem: firstItem, getCurrentSet: currentSet, setCurrentSetItem, setFirstItem, removeCloth } = ClothingStore;
+		if (!firstItem || firstItem?.type === clothingItem.type) {
+			setFirstItem(clothingItem);
+		}
+		setCurrentSetItem(clothingItem.type, clothingItem);
+
+		const nextItem = Object.entries(currentSet).find((set) => !set[1]);
+		console.log("next item", Object.entries(currentSet), nextItem);
+		if (nextItem) navigate("/clothing-select/" + nextItem[0]);
+		else {
+			console.log("popup");
+		}
 	};
 
 	return (
@@ -67,7 +88,7 @@ const ClothingSelect = () => {
 			<div id="clothing-items">
 				{clothingItemsAvaileable &&
 					clothingItemsAvaileable.map((clothingItem, index) => (
-						<Card clothingItem={clothingItem} image={clothingType && clothingImage[clothingType]} key={index} />
+						<Card clothingItem={clothingItem} image={clothingType && clothingImage[clothingType]} key={index} addItem={addItem} />
 					))}
 			</div>
 		</div>
