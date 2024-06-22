@@ -8,6 +8,7 @@ const AppRouter = () => {
 	const Layout = () => (
 		<div id="layout">
 			<Header />
+
 			<Outlet />
 		</div>
 	);
