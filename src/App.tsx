@@ -15,7 +15,7 @@ const App = () => {
 					timeout: 5000,
 				});
 				const response = await instance.get("");
-				ClothingStore.setClothingItems(response.data);
+				response.data?.length && ClothingStore.setClothingItems(response.data);
 			} catch (e: any) {
 				console.log("failed to fetch data");
 				//add popup

@@ -13,7 +13,7 @@ export const CLOTHING_ITEMS = {
 
 export const SLUGS = {
 	DressMe: "/",
-	Shirts: "clothing-select/shirts",
+	Shirts: "clothing-select/shirt",
 	Pants: "clothing-select/pants",
 	Shoes: "clothing-select/shoes",
 	Completed_Sets: "completed-sets",

@@ -1,0 +1,25 @@
+.card {
+	width: 90vw;
+	height: 8rem;
+	box-shadow: 3px 4px 5px grey;
+	position: relative;
+	.card-image {
+		height: 1rem;
+		width: 1rem;
+	}
+	.clothing-item-info {
+		color: black;
+		display: flex;
+		flex-direction: column;
+		.clothing-item-info-param {
+			margin-right: 0.25rem;
+			margin-left: 0.25rem;
+		}
+	}
+	.select-button {
+		position: absolute;
+		right: 4rem;
+		top: 30%;
+		background-color: darkgreen;
+	}
+}

@@ -1,15 +1,17 @@
 import { makeAutoObservable } from "mobx";
 import { clearPersistedStore, stopPersisting, startPersisting, isPersisting } from "mobx-persist-store";
-import { SavedSet, ClothingItems } from "../../models/clothing";
+import { SavedSet, ClothingItems, ClothingItem } from "../../models/Clothing";
 
 class ClothingStore {
 	constructor() {
 		makeAutoObservable(this);
 	}
 
-	persist_data = ["clothingItems", "startTime"];
+	persist_data = ["clothingItems", "startTime", "currentSet", "savedSets"];
 
 	clothingItems: ClothingItems = [];
+
+	currentSet: SavedSet = { shirt: null, pants: null, shoes: null };
 
 	startTime = new Date();
 
@@ -31,12 +33,24 @@ class ClothingStore {
 		return this.savedSets;
 	}
 
+	get getCurrentSet() {
+		return this.currentSet;
+	}
+
 	setClothingItems = (items: ClothingItems) => {
 		this.clothingItems = items;
 	};
 
 	addSavedSet = (set: SavedSet) => {
 		this.savedSets.push(set);
+	};
+
+	setCurrentSetItem = (type: keyof SavedSet, item: ClothingItem) => {
+		this.currentSet[type] = item;
+	};
+
+	resetCurrentSet = () => {
+		this.currentSet = { shirt: null, pants: null, shoes: null };
 	};
 
 	async clearStore() {

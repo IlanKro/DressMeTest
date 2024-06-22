@@ -2,7 +2,7 @@ import { makePersistable } from "mobx-persist-store";
 import { ClothingStore } from "../stores";
 
 export const persistStore = (target: typeof ClothingStore, properties: any, persistName: string) => {
-	target.stopPersisting();
+	target.isPersisting && target.stopPersisting();
 	return makePersistable(
 		target,
 		{

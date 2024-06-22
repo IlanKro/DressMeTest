@@ -1,0 +1,14 @@
+#clothing-select {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	#clothing-items {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		margin-top: 2rem;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+}

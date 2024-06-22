@@ -1,6 +1,7 @@
+export type ClothingType = "shirt" | "pants" | "shoes";
 export interface ClothingItem {
 	id: number;
-	type: string;
+	type: ClothingType;
 	color: string;
 	size: string;
 	brand: string;
@@ -9,7 +10,7 @@ export interface ClothingItem {
 export type ClothingItems = Array<ClothingItem>;
 
 export type SavedSet = {
-	shirt: ClothingItem;
-	pants: ClothingItem;
-	shoes: ClothingItem;
+	shirt: ClothingItem | null;
+	pants: ClothingItem | null;
+	shoes: ClothingItem | null;
 };
