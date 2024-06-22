@@ -3,9 +3,12 @@
 App to help a user decide what to wear based on a fixed API.
 Hours to make: 20.
 
-# Disclaimer
+# How to run
 
--The design and color choices are not made by a graphic designer so it won't look pretty, the layout is also lacking and I am aware of it, it's somethign that on a product you ask the customer's opinion or UI/UX designer.
+-   yarn (install dependecies)
+-   yarn dev
+
+*   make sure you have yarn installed, was made with node v20.9.0 using Vite.
 
 # Navigation
 
@@ -26,9 +29,15 @@ There's a back button at any stage that is not homepage.
 # Recommendation Algorithm
 
 the algorithem will recommend the user items based on size and color of the first selected element.
-Size - **\*
-Color- **
+Size - **
+Color - **
+
+# General Notes
+
+-   The design and color choices are not made by a graphic designer so it won't look pretty, the layout is also lacking and I am aware of it, it's somethign that on a product you ask the customer's opinion or UI/UX designer.
+
+-   Since it wasn't requested there is no "reset set" button, or a way to delete sets, also in the context of a closet it makes no sense to take out elements of the selection but that's what was requested.
 
 # Known bugs
 
--   there's a problem with mobx persist, due to the time constraint so far I couldn't find a solution it's a console bug, refreshing the pages just doesn't work too well, so avoid that.
+-   There's a problem with mobx persist, due to the time constraint so far I couldn't find a solution it's a console bug, refreshing the pages just doesn't work too well, so avoid that.
