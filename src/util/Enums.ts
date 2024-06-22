@@ -11,6 +11,12 @@ export const CLOTHING_ITEMS = {
 	SHOES: "shoes",
 };
 
+export const CLOTHING_ITEMS_PROPERTIES = {
+	SIZE: "size",
+	COLOR: "color",
+	BRAND: "brand",
+};
+
 export const SLUGS = {
 	DressMe: "/",
 	Shirts: "clothing-select/shirt",

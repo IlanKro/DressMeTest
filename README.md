@@ -49,3 +49,4 @@ I don't take options from the user this is just for sorting.
 # Known bugs
 
 -   There's a problem with mobx persist, due to the time constraint so far I couldn't find a solution it's a console bug, refreshing the pages just doesn't work too well, so avoid that.
+-   The color sorting might not work, the size one works.
