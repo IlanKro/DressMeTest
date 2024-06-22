@@ -3,7 +3,7 @@ export interface ClothingItem {
 	id: number;
 	type: ClothingType;
 	color: string;
-	size: string;
+	size: string | number;
 	brand: string;
 }
 

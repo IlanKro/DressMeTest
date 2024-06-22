@@ -1,7 +1,12 @@
 #clothing-select {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	#sort {
+		background-color: grey;
+		margin-top: 1rem;
+	}
 	#clothing-items {
 		display: flex;
 		justify-content: center;

@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { clearPersistedStore, stopPersisting, startPersisting, isPersisting } from "mobx-persist-store";
 import { SavedSet, ClothingItems, ClothingItem } from "../../models/Clothing";
+import { SIZE_CONVERTION } from "../../util/Enums";
 
 class ClothingStore {
 	constructor() {
@@ -38,7 +39,13 @@ class ClothingStore {
 	}
 
 	setClothingItems = (items: ClothingItems) => {
-		this.clothingItems = items;
+		this.clothingItems = this.removeSavedItems(items);
+	};
+
+	removeSavedItems = (clothingItems: ClothingItems) => {
+		return clothingItems.filter(
+			({ id }) => !this.savedSets.some((savedSet) => Object.values(savedSet).some((savedItem) => savedItem?.id === id))
+		);
 	};
 
 	addSavedSet = (set: SavedSet) => {
@@ -47,6 +54,17 @@ class ClothingStore {
 
 	setCurrentSetItem = (type: keyof SavedSet, item: ClothingItem) => {
 		this.currentSet[type] = item;
+	};
+
+	sortByRecommended = (items: ClothingItems) => {
+		return items;
+	};
+
+	convertSize = (size: string | number) => {
+		if (/^-?\d+$/.test("" + size)) return size;
+		const conversionedSize = Object.entries(SIZE_CONVERTION).find((conversion) => conversion[0] === size);
+
+		return conversionedSize ? conversionedSize[1] : size;
 	};
 
 	resetCurrentSet = () => {

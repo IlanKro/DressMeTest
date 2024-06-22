@@ -18,3 +18,11 @@ export const SLUGS = {
 	Shoes: "clothing-select/shoes",
 	Completed_Sets: "completed-sets",
 };
+
+export const SIZE_CONVERTION = {
+	S: 1,
+	M: 2,
+	L: 3,
+	XL: 4,
+	XXL: 5,
+};
