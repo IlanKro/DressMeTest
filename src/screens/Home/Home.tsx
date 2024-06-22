@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ClothingStore } from "../../stores";
 import { useNavigate } from "react-router-dom";
-import { SLUGS } from "../../util/Enums";
+import { SLUGS, API_URL } from "../../util/Enums";
+import axios from "axios";
 import "./Home.scss";
+import { observer } from "mobx-react";
 
 const Home = () => {
 	const { getSavedSets: savedSets, getClothingItems: clothingItems, getCurrentSet: currentSet } = ClothingStore;
 	document.title = "Home";
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const { setClothingItems, persist_data } = ClothingStore;
+		const fetch = async () => {
+			try {
+				const instance = axios.create({
+					baseURL: API_URL,
+					timeout: 5000,
+				});
+				const response = await instance.get("");
+				response.data?.length && setClothingItems(response.data);
+			} catch (e: any) {
+				console.log("failed to fetch data");
+				//add popup
+				return setClothingItems([]);
+			}
+		};
+
+		fetch();
+	}, []);
 
 	const ClothSelectButton = ({ buttonText, slug, isSelected }: { buttonText: string; slug: string; isSelected: boolean }) => {
 		return (
@@ -35,4 +57,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default observer(Home);

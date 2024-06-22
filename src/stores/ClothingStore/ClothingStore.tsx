@@ -2,7 +2,6 @@ import { makeAutoObservable } from "mobx";
 import { clearPersistedStore, stopPersisting, startPersisting, isPersisting } from "mobx-persist-store";
 import { SavedSet, ClothingItems, ClothingItem, CompletedSet } from "../../models/Clothing";
 import { SIZE_CONVERTION } from "../../util/Enums";
-import sortBy from "lodash/sortBy";
 import { PopupSettings } from "../../models/Popup";
 
 class ClothingStore {
@@ -10,7 +9,7 @@ class ClothingStore {
 		makeAutoObservable(this);
 	}
 
-	persist_data = ["clothingItems", "startTime", "currentSet", "savedSets", "currentSet", "firstItem"];
+	persist_data = ["clothingItemsAPI", "clothingItems", "startTime", "currentSet", "savedSets", "currentSet", "firstItem"];
 
 	clothingItems: ClothingItems = [];
 
@@ -66,12 +65,16 @@ class ClothingStore {
 		this.clothingItems = this.removeSavedItems(items);
 	};
 
+	//delete a clothing item from the general options.
 	removeSavedItems = (clothingItems: ClothingItems) => {
 		return clothingItems.filter(
 			({ id }) => !this.savedSets.some((savedSet) => Object.values(savedSet).some((savedItem) => (savedItem as ClothingItem)?.id === id))
 		);
 	};
-
+	//deletes a saved set
+	deletedSet = (index: number) => {
+		this.savedSets.splice(index, 1);
+	};
 	addSavedSet = (set: SavedSet) => {
 		this.savedSets.push({ ...set, time: this.getTimeSinceStart() });
 	};
@@ -86,15 +89,16 @@ class ClothingStore {
 
 	sortByRecommended = (items: ClothingItems) => {
 		let sortedItems = items;
+		console.log("🚀 ~ ClothingStore ~ sortedItems:", sortedItems);
 		if (this.getFirstItem) {
 			const sizeOfFirst = this.convertSize(this.getFirstItem.size);
 			const colorOfFirst = this.getFirstItem.color;
-			const sortByColor = (a: ClothingItem, b: ClothingItem) => (+(a?.color === colorOfFirst) - +(b?.color === colorOfFirst) ? 1 : -1);
+			const sortByColor = (a: ClothingItem, b: ClothingItem) => (+(a?.color === colorOfFirst) - +(b?.color === colorOfFirst) ? -1 : 1);
 			const distance = (a: number, t: number) => Math.abs(t - a);
-			const sortBySize = (a: ClothingItem, b: ClothingItem) =>
-				distance(this.convertSize(a?.size), sizeOfFirst) - distance(this.convertSize(b?.size), sizeOfFirst);
 
-			sortedItems = sortBy(sortedItems, [sortByColor, sortBySize]) as ClothingItems;
+			const sortBySize = (a: ClothingItem, b: ClothingItem) =>
+				distance(this.convertSize(a.size), sizeOfFirst) - distance(this.convertSize(b?.size), sizeOfFirst);
+			sortedItems = sortedItems.sort(sortBySize).sort(sortByColor);
 		}
 		return sortedItems;
 	};
@@ -113,6 +117,7 @@ class ClothingStore {
 	resetCurrentSet = () => {
 		this.startTime = new Date();
 		this.currentSet = { shirt: null, pants: null, shoes: null };
+		this.firstItem = null;
 	};
 
 	async clearStore() {
