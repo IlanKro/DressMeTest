@@ -1,8 +1,8 @@
-# DressMe
+# Dress Me
 
-App to help a user decide what to wear based on a fixed API.
-This app is basically a closet simulator.
-Hours to make: 24.
+App to help a user decide what to wear based on a fixed API, this app is basically a closet simulator.
+
+-   Hours to make: 24.
 
 # How to run
 
@@ -52,6 +52,11 @@ the algorithem will recommend the user items based on size and color of the firs
 -   In the context of a closet it makes no sense to take out elements of the selection but that's what was requested.
 
 -   The API works on the home page, seemed the most logical, it refreshes every time the user goes to the main page, it's probably not ideal.
+
+# Acknowledgments
+
+-   Icons are from FreePik
+-   Made with Vite
 
 # Known bugs
 
