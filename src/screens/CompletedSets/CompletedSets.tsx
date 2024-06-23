@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import ClothingStore from "../../stores/ClothingStore/ClothingStore";
 import { CLOTHING_ITEMS, CLOTHING_ITEMS_PROPERTIES } from "../../util/Enums";
-import { imgSrc } from "../../util/Images2";
+import { imgSrc } from "../../util/Images";
 import "./CompletedSets.scss";
 
 const CompletedSets = () => {

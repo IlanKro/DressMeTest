@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Card, Popup } from "../../components";
 import { ClothingItem, ClothingItems, ClothingType } from "../../models/Clothing";
 import { ClothingStore } from "../../stores";
-import { imgSrc } from "../../util/Images2";
+import { imgSrc } from "../../util/Images";
 import { SLUGS } from "../../util/Enums";
 import "./ClothingSelect.scss";
 
