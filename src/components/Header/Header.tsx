@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../../util/Enums";
-import { imgSrc } from "../../util/Images";
+import { imgSrc } from "../../util/Images2";
 import SideMenu from "../SideMenu";
 import "./Header.scss";
 
