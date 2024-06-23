@@ -16,40 +16,43 @@ const CompletedSets = () => {
 	};
 	return (
 		<div id="completed-sets">
-			{savedSets.map((savedSet, index) => {
-				const { time, ...savedSetShow } = savedSet;
-				console.log("Object.keys(savedSetShow)", Object.entries(savedSetShow));
-				return (
-					<div className={"completed-set"} key={index}>
-						<table width="100%" className="table">
-							<thead>
-								<tr>
-									<th>
-										<button onClick={() => deleteItem(index)}>
-											<img src={imgSrc.deleteBin} />
-										</button>
-									</th>
-									{Object.values(properties).map((property, index) => (
-										<th key={index}>{property}</th>
-									))}
-								</tr>
-							</thead>
-							<tbody>
-								{savedSetShow &&
-									Object.values(savedSetShow).map((cloth, index) => (
-										<tr key={index}>
-											<td>{cloth?.type}</td>
-											<td>{cloth?.size}</td>
-											<td>{cloth?.color}</td>
-											<td>{cloth?.brand}</td>
+			{savedSets &&
+				savedSets
+					.slice()
+					.reverse()
+					.map((savedSet, index) => {
+						const { time, ...savedSetShow } = savedSet;
+						return (
+							<div className={"completed-set"} key={index}>
+								<table width="100%" className="table">
+									<thead>
+										<tr>
+											<th>
+												<button onClick={() => deleteItem(index)}>
+													<img src={imgSrc.deleteBin} />
+												</button>
+											</th>
+											{Object.values(properties).map((property, index) => (
+												<th key={index}>{property}</th>
+											))}
 										</tr>
-									))}
-							</tbody>
-						</table>
-						<p>{"time to complete: " + savedSet.time} </p>
-					</div>
-				);
-			})}
+									</thead>
+									<tbody>
+										{savedSetShow &&
+											Object.values(savedSetShow).map((cloth, index) => (
+												<tr key={index}>
+													<td>{cloth?.type}</td>
+													<td>{cloth?.size}</td>
+													<td>{cloth?.color}</td>
+													<td>{cloth?.brand}</td>
+												</tr>
+											))}
+									</tbody>
+								</table>
+								<p>{"time to complete: " + savedSet.time + " seconds"} </p>
+							</div>
+						);
+					})}
 		</div>
 	);
 };

@@ -29,8 +29,8 @@ class ClothingStore {
 	};
 
 	getTimeSinceStart = () => {
-		// return new Date()?.getTime() - this.startTime?.getTime();
-		return 0;
+		if (!this.startTime) return 0;
+		return +((new Date()?.getTime() - this.startTime?.getTime()) / 1000).toFixed(1);
 	};
 
 	get getClothingItems() {
@@ -89,7 +89,6 @@ class ClothingStore {
 
 	sortByRecommended = (items: ClothingItems) => {
 		let sortedItems = items;
-		console.log("🚀 ~ ClothingStore ~ sortedItems:", sortedItems);
 		if (this.getFirstItem) {
 			const sizeOfFirst = this.convertSize(this.getFirstItem.size);
 			const colorOfFirst = this.getFirstItem.color;
@@ -115,7 +114,7 @@ class ClothingStore {
 	};
 
 	resetCurrentSet = () => {
-		this.startTime = new Date();
+		this.restartTimer();
 		this.currentSet = { shirt: null, pants: null, shoes: null };
 		this.firstItem = null;
 	};
